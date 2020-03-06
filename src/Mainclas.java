@@ -62,13 +62,15 @@ public class Mainclas {
                 "7", "|", "8", "|", "9",
         };                                       //board setup*******************
         boolean isgamewon = false;
-        int[] playerscombo = new int[5]; int[] compscombo = new int[5];
+
+        int didyouwin = 0;
+        //playercombo might have to take in the entire board range
 
         printarray(board);
 
         int[] arrayofplayerchoices = new int[15]; //to check for the ones theyve picked
 
-        //while(isgamewon = false){
+        //while(isgamewon == false){
             for(int turns = 1; turns <= 9; turns++){     //intend to just toggle it between 1 and 2
                 //odd number players turns
                 if(turns%2 != 0){
@@ -122,7 +124,8 @@ public class Mainclas {
 
                     printarray(board);
                     //put the board / players answers into an array
-                    
+
+                    checkwin(board, playerchoice, didyouwin);
 
                 }
                 //even number comp turns
@@ -149,7 +152,13 @@ public class Mainclas {
         return 0;
     }
 
+    public static int checkwin(String[] board, String playerchoice, int didyouwin){
+        if((board[0] == playerchoice) && (board[2] == playerchoice) && board[4] == playerchoice){
+            System.out.println("toprow win");
+        }
 
+        return 0;
+    }
 
 
 }
