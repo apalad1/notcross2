@@ -6,6 +6,7 @@ public class Mainclas {
         String playerchoice = "";
         String compchoice = "";
         boolean playerdidntchooseweird = false;
+        //boolean isgamewon = false;
 
         //couldnt return a modified string, they kept coming back from my other method as "" so theyre back on main
         //rather than as a recursive method elsewhere
@@ -33,12 +34,6 @@ public class Mainclas {
             }
         }
 
-        //************************************************************************
-
-        //game(playerchoice, compchoice)
-            //determine turn
-            //link player input to board changes ex: if(playerinp = 1) -> board[0] = x
-
         playgame(playerchoice, compchoice);
 
     }
@@ -50,7 +45,8 @@ public class Mainclas {
             System.out.println("You go first ");
             Goplayerfirst(playerchoice, compchoice);
         }else{
-            System.out.println("Comp go first, no code here yet it just ends");
+            System.out.println("Comp go first, no code here so just running playerfirst");
+            Goplayerfirst(playerchoice, compchoice);
         }
     }
 
@@ -61,10 +57,6 @@ public class Mainclas {
                 "4", "|", "5", "|", "6",
                 "7", "|", "8", "|", "9",
         };                                       //board setup*******************
-        boolean isgamewon = false;
-
-        int didyouwin = 0;
-        //playercombo might have to take in the entire board range
 
         printarray(board);
 
@@ -123,21 +115,35 @@ public class Mainclas {
                     }
 
                     printarray(board);
-                    //put the board / players answers into an array
 
-                    checkwin(board, playerchoice, didyouwin);
+                    //checks the board with the players symbol/icon, have it give back a value
+                    checkwinPLAYER(board, playerchoice);
+
 
                 }
                 //even number comp turns
-                if(turns%2 == 0){ //even number the comps turns
-                    System.out.println("comp turn, no code yet it just ends");
+                //the comp will run through the board and go to the first unoccupied spot
+                //cant go on "|" and player chosen spots
 
-                    //look through the array if its not 'playerchoice' or '|' then fill it only need 1 iteration
+                //problem: comp keeps taking its same spot
+                //solution: put in a if condition (board[i] != compchoice)
+                if(turns%2 == 0 && turns > 0){
+                    System.out.println("comp turn, ********************");
+                    for(int i = 0; i <board.length; i++){
+                        if((board[i] != "|") && (board[i] != playerchoice)) {
+                            if(board[i] != compchoice){
+                                board[i] = compchoice;
+                                break;
+                            }
 
+                        }
+                    }
+
+                    printarray(board);
                     //checkwin method
                 }
 
-                //print board
+
             }
         //}
 
@@ -152,9 +158,10 @@ public class Mainclas {
         return 0;
     }
 
-    public static int checkwin(String[] board, String playerchoice, int didyouwin){
+    public static int checkwinPLAYER(String[] board, String playerchoice){
         if((board[0] == playerchoice) && (board[2] == playerchoice) && board[4] == playerchoice){
             System.out.println("toprow win");
+
         }
 
         return 0;
