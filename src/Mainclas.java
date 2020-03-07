@@ -2,6 +2,7 @@ import java.util.*;
 
 public class Mainclas {
 
+
     public static void main(String[]args){
         String playerchoice = "";
         String compchoice = "";
@@ -17,7 +18,7 @@ public class Mainclas {
 
             playerchoice = userinput;
 
-            if((playerchoice.equals("x") || playerchoice.equals("o")) == true){
+            if((playerchoice.equals("x") || playerchoice.equals("o")) == true){ //force the player to choose again
                 System.out.println("player chose " + playerchoice);
                 playerdidntchooseweird = true;
             }
@@ -51,7 +52,7 @@ public class Mainclas {
     }
 
     public static void Goplayerfirst(String playerchoice, String compchoice){  //if the player is chosen to be rand1; player goes first
-
+        boolean isgamewon = false;
         String[] board = new String[15];
         board = new String[]{"1", "|", "2","|","3",
                 "4", "|", "5", "|", "6",
@@ -62,11 +63,12 @@ public class Mainclas {
 
         int[] arrayofplayerchoices = new int[15]; //to check for the ones theyve picked
 
-        //while(isgamewon == false){
-            for(int turns = 1; turns <= 9; turns++){     //intend to just toggle it between 1 and 2
-                //odd number players turns
-                if(turns%2 != 0){
-                    System.out.println("your turn");
+        while(isgamewon == false){
+
+                //PLAYERTURNPLAYERTURNPLAYERTURNPLAYERTURNPLAYERTURNPLAYERTURNPLAYERTURNPLAYERTURNPLAYERTURNPLAYERTURN
+
+
+                    System.out.println("your turn************************");
                     Scanner scanUsergofirst = new Scanner(System.in);
                     int userinput = scanUsergofirst.nextInt();
 
@@ -117,17 +119,16 @@ public class Mainclas {
                     printarray(board);
 
                     //checks the board with the players symbol/icon, have it give back a value
-                    checkwinPLAYER(board, playerchoice);
+                    isgamewon = checkwinPLAYER(board, playerchoice, isgamewon);
+
+                    System.out.println("isgamewon back in main is " + isgamewon);
 
 
-                }
-                //even number comp turns
-                //the comp will run through the board and go to the first unoccupied spot
-                //cant go on "|" and player chosen spots
+                //even number COMPTURNCOMPTURNCOMPTURNCOMPTURNCOMPTURNCOMPTURNCOMPTURNCOMPTURNCOMPTURNCOMPTURNCOMPTURN
 
-                //problem: comp keeps taking its same spot
-                //solution: put in a if condition (board[i] != compchoice)
-                if(turns%2 == 0 && turns > 0){
+                //the comp will run through the board and go to the first unoccupied spot cant go on "|" and player chosen spots
+                //problem: comp keeps taking its same spot, solution: put in a if condition (board[i] != compchoice)
+
                     System.out.println("comp turn, ********************");
                     for(int i = 0; i <board.length; i++){
                         if((board[i] != "|") && (board[i] != playerchoice)) {
@@ -141,11 +142,11 @@ public class Mainclas {
 
                     printarray(board);
                     //checkwin method
-                }
 
 
-            }
-        //}
+
+            
+        }
 
     }
 
@@ -158,13 +159,46 @@ public class Mainclas {
         return 0;
     }
 
-    public static int checkwinPLAYER(String[] board, String playerchoice){
+    public static boolean checkwinPLAYER(String[] board, String playerchoice, boolean isgamewon){
+
+
+        //HORIZONTAL WINS***********************************************************************************************
         if((board[0] == playerchoice) && (board[2] == playerchoice) && board[4] == playerchoice){
             System.out.println("toprow win");
-
+            isgamewon = true;
         }
-
-        return 0;
+        if((board[5] == playerchoice) && (board[7] == playerchoice) && board[9] == playerchoice){
+            System.out.println("midrow win");
+            isgamewon = true;
+        }
+        if((board[10] == playerchoice) && (board[12] == playerchoice) && board[14] == playerchoice){
+            System.out.println("botrow win");
+            isgamewon = true;
+        }
+        //VERTICAL WINS ************************************************************************************************
+        if(((board[0].equals(playerchoice)) && (board[5].equals(playerchoice)) && board[10].equals(playerchoice)) == true){
+            System.out.println("leftcol win");
+            isgamewon = true;
+        }
+        if((board[2] == playerchoice) && (board[7] == playerchoice) && board[12] == playerchoice){
+            System.out.println("midcol win");
+            isgamewon = true;
+        }
+        if((board[4] == playerchoice) && (board[9] == playerchoice) && board[14] == playerchoice){
+            System.out.println("rightcol win");
+            isgamewon = true;
+        }
+        //DIAGONAL WINS ************************************************************************************************
+        if((board[0] == playerchoice) && (board[7] == playerchoice) && board[14] == playerchoice){
+            System.out.println("diagonal win");
+            isgamewon = true;
+        }
+        if((board[4] == playerchoice) && (board[7] == playerchoice) && board[10] == playerchoice){
+            System.out.println("diagonal win");
+            isgamewon = true;
+        }
+        System.out.println("isgamewon in method is " + isgamewon);
+        return isgamewon;
     }
 
 
