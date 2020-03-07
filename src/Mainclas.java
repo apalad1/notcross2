@@ -82,31 +82,49 @@ public class Mainclas {
                     switch(userinput){  //depending on the userinput it should fill the corresponding slot on the board
                         case 1:
                             //loop through arrayofplayerchoices and if its a dupe have them choose again
-                            board[0] = playerchoice;
+                            if(board[0] != compchoice){
+                                board[0] = playerchoice;
+                            }
                             break;
                         case 2:
-                            board[2] = playerchoice;
+                            if(board[2] != compchoice){
+                                board[2] = playerchoice;
+                            }
                             break;
                         case 3:
-                            board[4] = playerchoice;
+                            if(board[4] != compchoice){
+                                board[4] = playerchoice;
+                            }
                             break;
                         case 4:
-                            board[5] = playerchoice;
+                            if(board[5] != compchoice){
+                                board[5] = playerchoice;
+                            }
                             break;
                         case 5:
-                            board[7] = playerchoice;
+                            if(board[7] != compchoice){
+                                board[7] = playerchoice;
+                            }
                             break;
                         case 6:
-                            board[9] = playerchoice;
+                            if(board[9] != compchoice){
+                                board[9] = playerchoice;
+                            }
                             break;
                         case 7:
-                            board[10] = playerchoice;
+                            if(board[10] != compchoice){
+                                board[10] = playerchoice;
+                            }
                             break;
                         case 8:
-                            board[12] = playerchoice;
+                            if(board[12] != compchoice){
+                                board[12] = playerchoice;
+                            }
                             break;
                         case 9:
-                            board[14] = playerchoice;
+                            if(board[14] != compchoice){
+                                board[14] = playerchoice;
+                            }
                             break;
                     }
                     //runs through board, logs in the ones that are the same as player choice
@@ -121,14 +139,12 @@ public class Mainclas {
                     //checks the board with the players symbol/icon, have it give back a value
                     isgamewon = checkwinPLAYER(board, playerchoice, isgamewon);
 
-                    System.out.println("isgamewon back in main is " + isgamewon);
-
 
                 //even number COMPTURNCOMPTURNCOMPTURNCOMPTURNCOMPTURNCOMPTURNCOMPTURNCOMPTURNCOMPTURNCOMPTURNCOMPTURN
 
                 //the comp will run through the board and go to the first unoccupied spot cant go on "|" and player chosen spots
                 //problem: comp keeps taking its same spot, solution: put in a if condition (board[i] != compchoice)
-
+                if(isgamewon == false){
                     System.out.println("comp turn, ********************");
                     for(int i = 0; i <board.length; i++){
                         if((board[i] != "|") && (board[i] != playerchoice)) {
@@ -142,10 +158,12 @@ public class Mainclas {
 
                     printarray(board);
                     //checkwin method
+                }
 
 
 
-            
+
+
         }
 
     }
@@ -197,7 +215,7 @@ public class Mainclas {
             System.out.println("diagonal win");
             isgamewon = true;
         }
-        System.out.println("isgamewon in method is " + isgamewon);
+
         return isgamewon;
     }
 
