@@ -78,7 +78,7 @@ public class Mainclas {
                         }
                     }
 
-
+                    //this is a switch because the board isnt 1->9 to just use a forloop on
                     switch(userinput){  //depending on the userinput it should fill the corresponding slot on the board
                         case 1:
                             //loop through arrayofplayerchoices and if its a dupe have them choose again
@@ -157,7 +157,7 @@ public class Mainclas {
                     }
 
                     printarray(board);
-                    //checkwin method
+                    isgamewon = checkwinCOMP(board, compchoice, isgamewon);
                 }
 
 
@@ -167,6 +167,7 @@ public class Mainclas {
         }
 
     }
+
 
 
     public static int printarray(String [] board){
@@ -219,5 +220,45 @@ public class Mainclas {
         return isgamewon;
     }
 
+    public static boolean checkwinCOMP(String[] board, String compchoice, boolean isgamewon){
 
+
+        //HORIZONTAL WINS***********************************************************************************************
+        if((board[0] == compchoice) && (board[2] == compchoice) && board[4] == compchoice){
+            System.out.println("toprow win");
+            isgamewon = true;
+        }
+        if((board[5] == compchoice) && (board[7] == compchoice) && board[9] == compchoice){
+            System.out.println("midrow win");
+            isgamewon = true;
+        }
+        if((board[10] == compchoice) && (board[12] == compchoice) && board[14] == compchoice){
+            System.out.println("botrow win");
+            isgamewon = true;
+        }
+        //VERTICAL WINS ************************************************************************************************
+        if(((board[0].equals(compchoice)) && (board[5].equals(compchoice)) && board[10].equals(compchoice)) == true){
+            System.out.println("leftcol win");
+            isgamewon = true;
+        }
+        if((board[2] == compchoice) && (board[7] == compchoice) && board[12] == compchoice){
+            System.out.println("midcol win");
+            isgamewon = true;
+        }
+        if((board[4] == compchoice) && (board[9] == compchoice) && board[14] == compchoice){
+            System.out.println("rightcol win");
+            isgamewon = true;
+        }
+        //DIAGONAL WINS ************************************************************************************************
+        if((board[0] == compchoice) && (board[7] == compchoice) && board[14] == compchoice){
+            System.out.println("diagonal win");
+            isgamewon = true;
+        }
+        if((board[4] == compchoice) && (board[7] == compchoice) && board[10] == compchoice){
+            System.out.println("diagonal win");
+            isgamewon = true;
+        }
+
+        return isgamewon;
+    }
 }
